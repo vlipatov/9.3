@@ -41,12 +41,18 @@ public class Main {
                                 + account.getOutcome()));
             }
         }
-        System.out.println("========================================================================================");
-        System.out.println("Всего поступило на счет - " + formatter.format(sumIncome) + " руб.");
-        System.out.println("========================================================================================");
+
+        System.out.println("=================================================================");
+        System.out.println("Всего поступило на счет - " + formatter.format(accounts.stream().mapToDouble(a -> a.getIncome()).sum()) + " руб.");
+        System.out.println("=================================================================");
         System.out.println("Расходы : ");
         for (Map.Entry entry : outcomes.entrySet()) {
             System.out.println(entry.getKey() + "- " + formatter.format(entry.getValue()) + " руб.");
         }
+        System.out.println("=================================================================");
+        System.out.println("Всего потрачено  - " + formatter.format(accounts.stream().mapToDouble(a -> a.getOutcome()).sum()) + " руб.");
+        System.out.println("=================================================================");
+
+
     }
 }
