@@ -1,34 +1,18 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.function.DoubleBinaryOperator;
 
 public class Account {
 
-//    private String type;
-//    private String number;
-//    private String currency;
-//    private String operationDate;
-//    private String reference;
     private String description;
-    private String in;
-    private String out;
+    private float income;
+    private float outcome;
 
-    public Account(String description, String in, String out) { // пока что использую только 3 значения - операция, приход и расход, поэтому оставил только их
-//        this.type = type;
-//        this.number = number;
-//        this.currency = currency;
-//        this.operationDate = operationDate;
-//        this.reference = reference;
+    public Account(String description, String income, String outcome) {
         this.description = description;
-        this.in = in;
-        this.out = out;
+        this.income = Float.valueOf(income);
+        this.outcome = Float.valueOf(outcome);
     }
-//    public String getReference() {
-//        return reference;
-//    }
-//
-//    public void getOperationDate() {
-//        System.out.println(operationDate);
-//    }
 
     public String getDescription() {
         String formattedDescription = null;
@@ -46,13 +30,11 @@ public class Account {
         return formattedDescription;
     }
 
-    public Double getOutcome() {
-        double outcome = Double.parseDouble(out);
+    public float getOutcome() {
         return outcome;
     }
 
-    public Double getIncome() {
-        double income = Double.parseDouble(in);
+    public float getIncome() {
         return income;
     }
 }

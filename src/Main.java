@@ -29,7 +29,7 @@ public class Main {
             }
         }
         /**---------==========------Для суммирования расходов создал HashMap-------------------------*/
-        Map<String, Double> outcomes = new HashMap<String, Double>();
+        Map<String, Float> outcomes = new HashMap<String, Float>();
         for (Account account : accounts) {
             sumIncome += account.getIncome();
             if (!outcomes.containsKey(account.getDescription())) {
