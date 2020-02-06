@@ -5,13 +5,13 @@ import java.util.function.DoubleBinaryOperator;
 public class Account {
 
     private String description;
-    private float income;
-    private float outcome;
+    private BigDecimal income;
+    private BigDecimal outcome;
 
     public Account(String description, String income, String outcome) {
         this.description = description;
-        this.income = Float.valueOf(income);
-        this.outcome = Float.valueOf(outcome);
+        this.income = new BigDecimal(income);
+        this.outcome = new BigDecimal(outcome);
     }
 
     public String getDescription() {
@@ -30,12 +30,11 @@ public class Account {
         return formattedDescription;
     }
 
-    public float getOutcome() {
+    public BigDecimal getOutcome() {
         return outcome;
     }
 
-    public float getIncome() {
+    public BigDecimal getIncome() {
         return income;
     }
-}
 
