@@ -6,7 +6,8 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        double sumIncome = 0;
+        BigDecimal sumIncome = new BigDecimal(0);
+        BigDecimal sumOutcome = new BigDecimal(0);
         DecimalFormat formatter = new DecimalFormat("###,###.###");
         List<String> lines = Files.readAllLines(Paths.get("data/movementList.csv"));
         ArrayList<Account> accounts = new ArrayList<>();
@@ -29,28 +30,28 @@ public class Main {
             }
         }
         /**---------==========------Для суммирования расходов создал HashMap-------------------------*/
-        Map<String, Float> outcomes = new HashMap<String, Float>();
+        Map<String, BigDecimal> outcomes = new HashMap<String, BigDecimal>();
         for (Account account : accounts) {
-            sumIncome += account.getIncome();
+            sumIncome = sumIncome.add(account.getIncome());
+            sumOutcome = sumOutcome.add(account.getOutcome());
             if (!outcomes.containsKey(account.getDescription())) {
                 outcomes.put(account.getDescription(), account.getOutcome());
             }
             if (outcomes.containsKey(account.getDescription())) {
                 if(!outcomes.containsValue(account.getOutcome()))
-                outcomes.put(account.getDescription(), (outcomes.get(account.getDescription())
-                                + account.getOutcome()));
+                outcomes.put(account.getDescription(), (outcomes.get(account.getDescription()).add(account.getOutcome())));
             }
         }
 
-        System.out.println("=================================================================");
-        System.out.println("Всего поступило на счет - " + formatter.format(accounts.stream().mapToDouble(a -> a.getIncome()).sum()) + " руб.");
+       System.out.println("=================================================================");
+        System.out.println("Всего поступило на счет - " + formatter.format(sumIncome) + " руб.");
         System.out.println("=================================================================");
         System.out.println("Расходы : ");
         for (Map.Entry entry : outcomes.entrySet()) {
             System.out.println(entry.getKey() + "- " + formatter.format(entry.getValue()) + " руб.");
         }
         System.out.println("=================================================================");
-        System.out.println("Всего потрачено  - " + formatter.format(accounts.stream().mapToDouble(a -> a.getOutcome()).sum()) + " руб.");
+        System.out.println("Всего потрачено  - " + formatter.format(sumOutcome) + " руб.");
         System.out.println("=================================================================");
 
 
